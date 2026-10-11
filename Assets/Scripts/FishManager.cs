@@ -8,6 +8,10 @@ public class FishManager : MonoBehaviour
 
     List<FishingSpot> activeFishingSpots;
     List<FishingSpot> inActivefishingSpots;
+
+    public Animator fishCaughtAnimator;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,7 +43,7 @@ public class FishManager : MonoBehaviour
         }
 
         //set the location and other data, like the fish
-        newFishingSpot.transform.position = new Vector3(Random.Range(-8f, 8f), 0.669f, Random.Range(-8f, 8f));
+        newFishingSpot.transform.position = new Vector3(Random.Range(-8f, 8f), 0f, Random.Range(-8f, 8f));
 
         activeFishingSpots.Add(newFishingSpot);
     }
@@ -50,5 +54,10 @@ public class FishManager : MonoBehaviour
 
         activeFishingSpots.Remove(toRemove);
         inActivefishingSpots.Add(toRemove);
+    }
+
+    public void CatchFish(Fish _fish)
+    {
+        fishCaughtAnimator.SetTrigger("Test");
     }
 }

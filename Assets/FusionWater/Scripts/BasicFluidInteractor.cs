@@ -8,7 +8,7 @@ namespace Fusion.Fluid {
     {
         public override void FluidUpdate()
         {
-            var fluidSurface = fluid.coll ? fluid.coll.bounds.max.y : fluid.transform.position.y;
+            var fluidSurface = fluid.GetHeight(transform.position);
 
 
             float difference = transform.position.y - fluidSurface;
@@ -28,5 +28,7 @@ namespace Fusion.Fluid {
                 rb.AddForceAtPosition(-rb.linearVelocity * dampeningFactor * volume, transform.position, ForceMode.Force);
             }
         }
+
+
     }
 }

@@ -7,6 +7,5 @@ public class PoolTable : MonoBehaviour
     private void OnMouseDown()
     {
         //start the aim function
-        gameManager.StartAim();
     }
 }

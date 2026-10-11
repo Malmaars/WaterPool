@@ -15,14 +15,14 @@ namespace Fusion.Fluid
 
         public bool reverseFluid;
 
-        public Collider coll { get; private set; }
+        //public Collider coll { get; private set; }
 
         private void Start()
         {
-            coll = GetComponent<Collider>();
+            //coll = GetComponent<Collider>();
         }
 
-        private void OnTriggerEnter(Collider other)
+        /*private void OnTriggerEnter(Collider other)
         {
             if(other.TryGetComponent(out BaseFluidInteractor fluidInteractor))
             {
@@ -36,6 +36,6 @@ namespace Fusion.Fluid
             {
                 fluidInteractor.ExitFluid(this);
             }
-        }
+        }*/
     }
 }

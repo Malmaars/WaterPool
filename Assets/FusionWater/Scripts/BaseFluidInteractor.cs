@@ -9,7 +9,8 @@ namespace Fusion.Fluid
     public abstract class BaseFluidInteractor : MonoBehaviour
     {
         [HideInInspector] public Rigidbody rb;
-        [HideInInspector] public Collider coll;
+        [HideInInspector] public SphereCollider coll;
+        [HideInInspector] protected Waves waves;
 
         [HideInInspector] public float volume;
 
@@ -24,7 +25,7 @@ namespace Fusion.Fluid
         [HideInInspector] float airAngularDrag;
 
         [HideInInspector] public int inFluidCount;
-        [HideInInspector] public Fluid fluid;
+        [HideInInspector] public Waves fluid;
 
         public bool simulateWaterTurbulence;
         [Range(0, 5)] public float turbulenceStrength = 1;
@@ -35,13 +36,17 @@ namespace Fusion.Fluid
 
         public float floatStrength = 2;
 
+  
+
         public abstract void FluidUpdate();
 
         #region UnityFunctions
+
         public virtual void Start()
         {
-            coll = GetComponent<Collider>();
+            coll = GetComponent<SphereCollider>();
             rb = GetComponent<Rigidbody>();
+            waves = FindFirstObjectByType<Waves>();
 
             airDrag = rb.linearDamping;
             airAngularDrag = rb.angularDamping;
@@ -56,6 +61,16 @@ namespace Fusion.Fluid
         {
             if (customVolume != 0)
                 volume = customVolume;
+
+            if(waves.IsUnderwater(transform.position))
+            {
+                if (inFluidCount == 0)
+                    EnterFluid(waves);
+            }
+            else if(inFluidCount > 0)
+            {
+                ExitFluid(waves);
+            }
         }
 
         public void Awake()
@@ -90,7 +105,7 @@ namespace Fusion.Fluid
             return turbulence * turbulenceStrength;
         }
 
-        public void EnterFluid(Fluid enteredFluid)
+        public void EnterFluid(Waves enteredFluid)
         {
             fluid = enteredFluid;
             inFluidCount++;

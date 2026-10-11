@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,24 +9,23 @@ public class GameManager : MonoBehaviour
     public float shootStrength;
 
     public FishManager fishManager;
+    public LayerMask ballLayers;
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if(Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 100, ballLayers))
         {
-            if (aiming)
-            {
-                //stop aiming
-                aiming = false;
-            }
+            hit.collider.GetComponent<Ball>().OnClick();
         }
-    }
-    public void StartAim()
-    {
-        aiming = true;
 
-        //show an aim line
+        if (Input.GetKeyDown(KeyCode.R)) 
+            SceneManager.LoadScene(0);
 
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
 
     public void StartRound()

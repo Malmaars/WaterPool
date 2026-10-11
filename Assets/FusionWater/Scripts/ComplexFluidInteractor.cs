@@ -11,7 +11,7 @@ namespace Fusion.Fluid {
 
         public override void Start()
         {
-            coll = GetComponent<Collider>();
+            coll = GetComponent<SphereCollider>();
             rb = GetComponent<Rigidbody>();
 
             if (customVolume != 0)
@@ -107,7 +107,7 @@ namespace Fusion.Fluid {
 
             if(GUILayout.Button("Use Bounding Box Corners"))
             {
-                complexFluidInteractor.coll = complexFluidInteractor.GetComponent<Collider>();
+                complexFluidInteractor.coll = complexFluidInteractor.GetComponent<SphereCollider>();
 
                 Vector3[] corners = complexFluidInteractor.DefineCorners();
 

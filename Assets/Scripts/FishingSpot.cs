@@ -11,6 +11,7 @@ public class FishingSpot : MonoBehaviour
     {
         if(other.GetComponent<Ball>() != null)
         {
+            fishManager.CatchFish(null);
             fishManager.DeActivateFishingSpot(this);
         }
     }

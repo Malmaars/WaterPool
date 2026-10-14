@@ -39,7 +39,7 @@ public class FishManager : MonoBehaviour
         else
         {
             newFishingSpot = Instantiate(fishingSpotPrefab).GetComponent<FishingSpot>();
-            newFishingSpot.Initialize(this);
+            newFishingSpot.Initialize(this, null);
         }
 
         //set the location and other data, like the fish

@@ -15,6 +15,8 @@ public class Ball : MonoBehaviour
     Vector3 shotDirection;
 
     public LineRenderer lineRenderer;
+
+    public Fish caughtFish;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

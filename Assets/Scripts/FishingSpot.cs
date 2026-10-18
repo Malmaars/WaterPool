@@ -3,7 +3,7 @@ using UnityEngine;
 public class FishingSpot : MonoBehaviour
 {
     FishManager fishManager;
-    Fish myFish;
+    public Fish myFish;
     public void Initialize(FishManager manager, Fish _fish)
     {
         fishManager = manager;
@@ -13,7 +13,12 @@ public class FishingSpot : MonoBehaviour
     {
         if(other.GetComponent<Ball>() != null)
         {
-            other.GetComponent<Ball>().caughtFish = myFish;
+            Ball touchedBall = other.GetComponent<Ball>();
+
+            if (touchedBall.caughtFish.visual != null && touchedBall.caughtFish.name != null)
+                return;
+
+            touchedBall.caughtFish = myFish;
             fishManager.DeActivateFishingSpot(this);
         }
     }

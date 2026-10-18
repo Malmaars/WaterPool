@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1163866174807569209}
   - component: {fileID: -9162524983012731607}
   - component: {fileID: 3821300558833734498}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,6 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582f90433eba7334399fb73542a36b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myFish:
+    visual: {fileID: 0}
+    name: 
 --- !u!135 &3821300558833734498
 SphereCollider:
   m_ObjectHideFlags: 0

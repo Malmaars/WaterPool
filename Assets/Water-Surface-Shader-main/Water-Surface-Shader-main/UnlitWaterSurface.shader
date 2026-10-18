@@ -34,6 +34,7 @@ Shader "Unlit/UnlitWaterSurface"
         _ReflectNormalOffsetScale("Reflection Normal Vector Offset Weight", Range(0, 1)) = 1.0
         _ReflectionColor ("Reflection Color", Color) = (0,0,1,0)
         _ReflectionStep ("Reflection Color Step Threshold", Range(0, 1)) = 0.2
+        _ReflectionScrollSpeed("Reflection Scroll Speed", float) = 0.05
 
         _SpotLightColor ("Spot Light Color", Color) = (0,0,1,0)
         _SpotLightStep ("Spot Light Reflection Color Step Threshold", Range(0, 1)) = 0.2
@@ -107,6 +108,7 @@ Shader "Unlit/UnlitWaterSurface"
                 float _UnderwaterWeight;
 
                 float _RefractionNormalWeight;
+                float _ReflectionScrollSpeed;
 
                 float _NoiseOctave;
                 float _NoiseFrequency;
@@ -303,7 +305,7 @@ Shader "Unlit/UnlitWaterSurface"
                 float ripple_flag = ripple_out_mask - ripple_in_mask;
 
                 // Reflection
-                float4 normals_offset_flow = SAMPLE_TEXTURE2D(_FlowMap, sampler_FlowMap, i.uv_flow * _ReflectNormalScale * 0.5 + _Time.y * 0.05);
+                float4 normals_offset_flow = SAMPLE_TEXTURE2D(_FlowMap, sampler_FlowMap, i.uv_flow * _ReflectNormalScale * 0.5 + _Time.y * _ReflectionScrollSpeed);
                 float4 nr = SAMPLE_TEXTURE2D(_ReflectionMap, sampler_ReflectionMap, i.uv_flow * _ReflectNormalScale + normals_offset_flow.xx) * 2 - 1;
                 float4 ng = SAMPLE_TEXTURE2D(_ReflectionMap, sampler_ReflectionMap, i.uv_flow * _ReflectNormalScale * 1.2 + normals_offset_flow.xx) * 2 - 1;
                 float4 nb = SAMPLE_TEXTURE2D(_ReflectionMap, sampler_ReflectionMap, i.uv_flow * _ReflectNormalScale * 0.6 + normals_offset_flow.xx) * 2 - 1;

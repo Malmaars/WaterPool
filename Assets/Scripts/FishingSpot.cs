@@ -15,7 +15,7 @@ public class FishingSpot : MonoBehaviour
         {
             Ball touchedBall = other.GetComponent<Ball>();
 
-            if (touchedBall.caughtFish.visual != null && touchedBall.caughtFish.name != null)
+            if (touchedBall.caughtFish != null && touchedBall.caughtFish.visual != null && touchedBall.caughtFish.name != null)
                 return;
 
             touchedBall.caughtFish = myFish;

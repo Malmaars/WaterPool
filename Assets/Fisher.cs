@@ -11,13 +11,14 @@ public class Fisher : MonoBehaviour
         }
     }
 
-    void ReelIn(Ball toReel)
+    public virtual void ReelIn(Ball toReel)
     {
         if(toReel.caughtFish != null && toReel.caughtFish.visual != null && toReel.caughtFish.name != null)
         {
             //catch the fish and calculate points?
             BlackBoard.fishManager.CatchFish(toReel.caughtFish);
-            Destroy(toReel.gameObject);
+            BlackBoard.gameManager.EditPoints(1);
+            toReel.ThrowBack();
         }
     }
 }

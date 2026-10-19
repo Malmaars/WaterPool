@@ -28,10 +28,6 @@ public class FishManager : MonoBehaviour
     private void Awake()
     {
         BlackBoard.fishManager = this;
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
         activeFishingSpots = new List<FishingSpot>();
         inActivefishingSpots = new List<FishingSpot>();
     }
@@ -129,7 +125,7 @@ public class FishManager : MonoBehaviour
         }
 
         //set the location and other data, like the fish
-        newFishingSpot.transform.position = new Vector3(Random.Range(-8f, 8f), 0f, Random.Range(-8f, 8f));
+        newFishingSpot.transform.position = new Vector3(Random.Range(-7f, 7f), 0f, Random.Range(-7f, 7f));
 
         activeFishingSpots.Add(newFishingSpot);
     }

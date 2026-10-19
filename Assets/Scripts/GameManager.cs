@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,21 @@ public class GameManager : MonoBehaviour
     public FishManager fishManager;
     public LayerMask ballLayers;
 
+    int targetPoints;
+    int points;
+    public TextMeshProUGUI currentPointsText, targetPointsText;
+    public Slider pointSlider;
+
+
+    private void Awake()
+    {
+        BlackBoard.gameManager = this;
+    }
+
+    private void Start()
+    {
+        StartRound();
+    }
     private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -31,7 +48,25 @@ public class GameManager : MonoBehaviour
     public void StartRound()
     {
         //spawn a couple of fishing spots or smth
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
             fishManager.SpawnFishingSpot();
+
+        targetPoints = 5;
+        points = 0;
+        UpdatePointsVisuals();
+    }
+
+    public void EditPoints(int _editing)
+    {
+        points += _editing;
+        UpdatePointsVisuals();
+    }
+
+    void UpdatePointsVisuals()
+    {
+        pointSlider.maxValue = targetPoints;
+        pointSlider.value = points;
+        currentPointsText.text = points.ToString();
+        targetPointsText.text = targetPoints.ToString();
     }
 }

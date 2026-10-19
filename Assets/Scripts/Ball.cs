@@ -82,4 +82,11 @@ public class Ball : MonoBehaviour
     {
         dragging = true;
     }
+
+    public void ThrowBack()
+    {
+        caughtFish = null;
+        transform.position = new Vector3(Random.Range(-6f, 6f),0, Random.Range(-6f, 6f));
+        rb.linearVelocity = Vector3.zero;
+    }
 }

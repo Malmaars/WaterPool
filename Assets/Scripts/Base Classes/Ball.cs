@@ -8,4 +8,12 @@ public class Ball : DataHolder
     {
         physicsBall = _physicsBall;
     }
+
+    public virtual void OnCatch() { }
+
+    public virtual void OnAnyContact() { }
+
+    public virtual void OnFishingHoleContact() { }
+
+    public virtual void OnBallContact() { }
 }

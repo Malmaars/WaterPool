@@ -13,6 +13,11 @@ public class DataHolder
     public Sprite visual;
     public string name;
     public string description;
+
+    public virtual void OnGameStart() { }
+    public virtual void OnGameEnd() { }
+    public virtual void OnTurnStart() { }
+    public virtual void OnTurnEnd() { }
 }
 
 [Serializable]

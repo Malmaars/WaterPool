@@ -7,18 +7,20 @@ public class HighlightInfo : Singleton<HighlightInfo>
 {
 
     bool dataSelectionActive;
-    Vector3 dataSelectionTargetLocation;
+    Vector2 dataSelectionTargetLocation;
+
 
     DataHolder highlightedData;
     Transform highlightLocation;
 
 
     [Header("Customizable data")]
-    public float dataSelectionMoveSpeed, dataSelectionFadeSpeed;
+    public float dataSelectionMoveSpeed;
+    public float dataSelectionFadeSpeed;
 
     [Header("Prefabs and sprites")]
-    public Sprite ballTypeSprite; 
-    public Sprite fishTypeSprite; 
+    public Sprite ballTypeSprite;
+    public Sprite fishTypeSprite;
     public Sprite fisherTypeSprite;
 
     [Header("Essential assignments")]
@@ -58,7 +60,7 @@ public class HighlightInfo : Singleton<HighlightInfo>
         else
             highlightedData = null;
 
-        if(highlightedData != null)
+        if (highlightedData != null)
             SetInfoData(highlightedData, highlightLocation);
 
         else
@@ -77,13 +79,26 @@ public class HighlightInfo : Singleton<HighlightInfo>
             if (dataSelectionGroup.alpha > 0f)
                 dataSelectionGroup.alpha = (dataSelectionGroup.alpha <= 0f) ? 0f : dataSelectionGroup.alpha - Time.deltaTime * dataSelectionFadeSpeed;
         }
+
         dataSelection.anchoredPosition = Vector3.Lerp(dataSelection.anchoredPosition, dataSelectionTargetLocation, Time.deltaTime * dataSelectionMoveSpeed);
     }
     void SetInfoData(DataHolder _data, Transform _highlighted)
     {
         dataSelectionActive = true;
 
-        dataSelectionTargetLocation = Camera.main.WorldToScreenPoint(_highlighted.position) + new Vector3(-48, 80, 0);
+        dataSelectionTargetLocation = Camera.main.WorldToScreenPoint(_highlighted.position) + new Vector3(-200, 34, 0);
+
+
+        //TODO change this depending on the size of the UI, which will be differ later on
+        if(dataSelectionTargetLocation.x < 10)
+            dataSelectionTargetLocation.x = 10;
+        if(dataSelectionTargetLocation.x > 1510)
+            dataSelectionTargetLocation.x = 1510;
+        if (dataSelectionTargetLocation.y < 10)
+            dataSelectionTargetLocation.y = 10;
+        if (dataSelectionTargetLocation.y > 855)
+            dataSelectionTargetLocation.y = 855;
+
 
         if (dataSelectionGroup.alpha <= 0)
             dataSelection.anchoredPosition = dataSelectionTargetLocation;

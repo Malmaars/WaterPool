@@ -17,7 +17,13 @@ public class Fisher : DataHolder
             //spawn an effect
             ScorePointEffect pointVisual = EffectsManager.Instance.RequestEffect<ScorePointEffect>();
             pointVisual.myBody.transform.position = body.transform.position + Vector3.up * 3;
+            OnReelIn();
             toReel.ThrowBack();
         }
+    }
+
+    public virtual void OnReelIn()
+    {
+
     }
 }

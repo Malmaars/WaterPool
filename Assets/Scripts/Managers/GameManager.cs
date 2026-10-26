@@ -1,9 +1,11 @@
+using DebugUI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     bool aiming;
     Vector3 aimDirection;
@@ -16,17 +18,30 @@ public class GameManager : MonoBehaviour
     int targetPoints;
     int points;
     public TextMeshProUGUI currentPointsText, targetPointsText;
-    public Slider pointSlider;
+    public UnityEngine.UI.Slider pointSlider;
+
+    public Animator cameraAnimator;
+    public static UIDocument uiDocument;
 
 
     private void Awake()
     {
-        BlackBoard.gameManager = this;
+        uiDocument = FindFirstObjectByType<UIDocument>();
     }
 
     private void Start()
     {
         StartRound();
+
+        var builder = new DebugUIBuilder();
+        builder.AddLabel("Camera Settings");
+        builder.AddButton("toggle OrthoGraphic", () => cameraAnimator.SetBool("OrthoGraphic", !cameraAnimator.GetBool("OrthoGraphic")));
+        builder.AddButton("toggle Camera view", () => cameraAnimator.SetBool("CameraView", !cameraAnimator.GetBool("CameraView")));
+        builder.ConfigureWindowOptions(options =>
+        {
+            options.Draggable = true;
+        });
+        builder.BuildWith(uiDocument);
     }
     private void Update()
     {
@@ -34,7 +49,7 @@ public class GameManager : MonoBehaviour
         RaycastHit hit;
         if(Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit, 100, ballLayers))
         {
-            hit.collider.GetComponent<Ball>().OnClick();
+            hit.collider.GetComponent<PhysicsBall>().OnClick();
         }
 
         if (Input.GetKeyDown(KeyCode.R)) 

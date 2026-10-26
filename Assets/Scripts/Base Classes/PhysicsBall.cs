@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class PhysicsBall : MonoBehaviour
 {
     float maxHeight = 1f;
     float extraGravity = 1;
@@ -16,11 +16,13 @@ public class Ball : MonoBehaviour
 
     public LineRenderer lineRenderer;
 
+    public Ball myBallData;
     public Fish caughtFish;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        myBallData = new Ball(this);
     }
 
     private void Update()

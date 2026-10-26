@@ -11,9 +11,9 @@ public class FishingSpot : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Ball>() != null)
+        if(other.GetComponent<PhysicsBall>() != null)
         {
-            Ball touchedBall = other.GetComponent<Ball>();
+            PhysicsBall touchedBall = other.GetComponent<PhysicsBall>();
 
             if (touchedBall.caughtFish != null && touchedBall.caughtFish.visual != null && touchedBall.caughtFish.name != null)
                 return;
